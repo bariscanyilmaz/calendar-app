@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CalendarEvent, CalendarView, DAYS_OF_WEEK } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import { EventView } from 'src/app/models/event-view';
+import { CalendarService } from 'src/app/services/calendar.service';
 
 @Component({
   selector: 'app-home',
@@ -24,25 +25,26 @@ export class HomeComponent implements OnInit {
 
   CalendarView = CalendarView;
 
-
   modalData: {
     action: string;
     event: CalendarEvent;
   };
 
 
-  myEvents: CalendarEvent<EventView>[] = [
-
-  ];
+  myEvents: CalendarEvent<EventView>[] = [];
 
   activeDayIsOpen: boolean = false;
 
-  displayedColumns: string[] = ['no', 'date', 'name', 'action'];
+  displayedColumns: string[] = ['no', 'name', 'action'];
   dataSource: CalendarEvent<EventView>[] = [];
 
-  constructor() { }
+  constructor(private calendarService: CalendarService) { }
 
   ngOnInit(): void {
+
+    this.calendarService.getEvents().subscribe(resp => {
+      this.myEvents = resp;
+    });
 
   }
 
@@ -59,7 +61,7 @@ export class HomeComponent implements OnInit {
   }
 
   newEvent(): void {
-    //this.router.navigate(['event']);
+
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -74,16 +76,15 @@ export class HomeComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-  getMonth() {
-    //return this.calendarService.getMonth(this.viewDate.getMonth()).name;
-  }
-
   delete(model: EventView) {
     const index = this.dataSource.indexOf(model);
     if (index > -1) {
-      //this.calendarService.deleteEvent(model);
-      this.dataSource.splice(index, 1);
-      this.refresh.next();
+
+      this.calendarService.deleteEvent(model.id).subscribe(res => {
+        this.dataSource.splice(index, 1);
+        this.refresh.next();
+      });
+
     }
   }
 
