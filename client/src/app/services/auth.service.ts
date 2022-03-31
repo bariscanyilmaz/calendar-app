@@ -22,6 +22,7 @@ export class AuthService {
 
   setLoggedIn(token:string){
     localStorage.setItem('token',token);
+    
     this.isLoggedIn.next(true);
   }
 
