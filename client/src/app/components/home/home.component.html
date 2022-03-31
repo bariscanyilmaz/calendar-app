@@ -13,7 +13,7 @@
 
     <mat-divider></mat-divider>
 
-    <mwl-calendar-month-view [viewDate]="viewDate" [weekStartsOn]="weekStartsOn" [locale]="locale" [events]="myEvents"
+    <mwl-calendar-month-view [viewDate]="viewDate" [weekStartsOn]="weekStartsOn" [events]="myEvents"
         [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
         (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-month-view>

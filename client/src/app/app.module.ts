@@ -17,10 +17,15 @@ import { MatTableModule } from "@angular/material/table";
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
-import localeTr from '@angular/common/locales/tr';
+import localeEn from '@angular/common/locales/en';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-registerLocaleData(localeTr);
+registerLocaleData(localeEn);
+moment.updateLocale('en',{
+  week:{
+    dow:1
+  }
+})
 export function momentAdapterFactory() {
   return adapterFactory(moment);
 };

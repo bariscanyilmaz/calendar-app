@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
 
   viewDate: Date = new Date();
 
-  locale: string = 'tr_TR';
   weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
   weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
   refresh: Subject<any> = new Subject<any>();
