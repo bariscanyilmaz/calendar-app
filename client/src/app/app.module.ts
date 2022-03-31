@@ -11,7 +11,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from "@angular/material/input";
 import { MatIconModule } from "@angular/material/icon";
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from "@angular/material/divider";
+import { MatTableModule } from "@angular/material/table";
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import * as moment from 'moment';
+import localeTr from '@angular/common/locales/tr';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeTr);
+export function momentAdapterFactory() {
+  return adapterFactory(moment);
+};
 
 
 @NgModule({
@@ -30,7 +41,10 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatDividerModule,
     AppRoutingModule,
+    MatTableModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
   ],
   providers: [],
   bootstrap: [AppComponent]
