@@ -1,3 +1,24 @@
-<div class="container">
-    <router-outlet></router-outlet>
-</div>
+<mat-sidenav-container class="example-container">
+
+    <mat-sidenav mode="over" class="side-nav" [(opened)]="opened" *ngIf="(isLoggedIn$ | async)">
+        <mat-toolbar color="primary"><span>{{title}}</span></mat-toolbar>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+
+            <span class="app-title">{{title}}</span>
+            <span class="spacer"></span>
+
+            <div class="toolbar-actions">
+                <span class="username" *ngIf="(isLoggedIn$ | async)">username</span>
+                <button mat-icon-button *ngIf="(isLoggedIn$ | async)" (click)="logout()">
+                    <mat-icon>exit_to_app
+                    </mat-icon>
+                </button>
+            </div>
+        </mat-toolbar>
+        <div class="container">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

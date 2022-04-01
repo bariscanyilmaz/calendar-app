@@ -15,6 +15,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from "@angular/material/divider";
 import { MatTableModule } from "@angular/material/table";
 import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatToolbarModule } from "@angular/material/toolbar";
+
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
 import localeEn from '@angular/common/locales/en';
@@ -49,8 +52,11 @@ export function momentAdapterFactory() {
     MatIconModule,
     MatButtonModule,
     MatDividerModule,
+    MatSidenavModule,
+    MatToolbarModule,
     AppRoutingModule,
     MatTableModule,
+    
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
   ],
   providers: [],
