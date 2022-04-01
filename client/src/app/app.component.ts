@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -11,20 +11,26 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit {
   title = 'CalendarApp';
 
-  opened: boolean;
-  isLoggedIn$: Observable<boolean>;
+
+  isLoggedIn: boolean;
   unReadCount: number = 0;
   @ViewChild(MatSidenav) sidenav: MatSidenav;
 
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
   ngOnInit(): void {
-    this.isLoggedIn$ = this.authService.isAuth();
+    this.authService.isAuth().subscribe(res => {
+      this.isLoggedIn = res;
+      if (!res) {
+        this.router.navigate(['/login']);
+      }
+
+    })
   }
 
   logout(): void {
-    
+    this.authService.logOut();
   }
 
 }

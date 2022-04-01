@@ -1,6 +1,6 @@
 <mat-sidenav-container class="example-container">
 
-    <mat-sidenav mode="over" class="side-nav" [(opened)]="opened" *ngIf="(isLoggedIn$ | async)">
+    <mat-sidenav mode="over" class="side-nav" *ngIf="(isLoggedIn)">
         <mat-toolbar color="primary"><span>{{title}}</span></mat-toolbar>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -10,8 +10,8 @@
             <span class="spacer"></span>
 
             <div class="toolbar-actions">
-                <span class="username" *ngIf="(isLoggedIn$ | async)">username</span>
-                <button mat-icon-button *ngIf="(isLoggedIn$ | async)" (click)="logout()">
+                <span class="username" *ngIf="(isLoggedIn)">username</span>
+                <button mat-icon-button *ngIf="(isLoggedIn)" (click)="logout()">
                     <mat-icon>exit_to_app
                     </mat-icon>
                 </button>

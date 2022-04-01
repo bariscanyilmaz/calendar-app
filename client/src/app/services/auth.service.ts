@@ -7,27 +7,33 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  isLoggedIn:BehaviorSubject<boolean>=new BehaviorSubject<boolean>(true);
-  user:User;
+  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  user: User;
 
   constructor() { }
 
-  login(user:User):Observable<boolean>{
+  login(user: User): Observable<boolean> {
+    //return this.http.post('',user);
     return of(true);
   }
 
-  signup(user:User):Observable<boolean>{
+  signup(user: User): Observable<boolean> {
     return of(true);
   }
 
-  setLoggedIn(token:string){
-    localStorage.setItem('token',token);
-    
+  setLoggedIn(token: string) {
+    localStorage.setItem('token', token);
+
     this.isLoggedIn.next(true);
   }
 
-  isAuth():Observable<boolean>{
+  isAuth(): Observable<boolean> {
     return this.isLoggedIn.asObservable();
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.isLoggedIn.next(false);
   }
 
 }
