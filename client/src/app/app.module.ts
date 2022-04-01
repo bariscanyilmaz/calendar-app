@@ -22,11 +22,12 @@ import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
 import localeEn from '@angular/common/locales/en';
 import { registerLocaleData } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.intercepter';
 registerLocaleData(localeEn);
-moment.updateLocale('en',{
-  week:{
-    dow:1
+moment.updateLocale('en', {
+  week: {
+    dow: 1
   }
 })
 export function momentAdapterFactory() {
@@ -56,10 +57,10 @@ export function momentAdapterFactory() {
     MatToolbarModule,
     AppRoutingModule,
     MatTableModule,
-    
+
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

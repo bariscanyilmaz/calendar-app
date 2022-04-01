@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
 
 
   isLoggedIn: boolean;
-  unReadCount: number = 0;
   @ViewChild(MatSidenav) sidenav: MatSidenav;
 
 

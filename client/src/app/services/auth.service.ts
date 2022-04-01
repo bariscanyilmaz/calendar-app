@@ -7,7 +7,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   user: User;
 
   constructor() { }
@@ -28,6 +28,7 @@ export class AuthService {
   }
 
   isAuth(): Observable<boolean> {
+    //
     return this.isLoggedIn.asObservable();
   }
 
